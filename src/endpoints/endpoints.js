@@ -78,8 +78,9 @@ const weatherEndpoint = async(req, res)=>{
 
 // Función para indicar que se ha accedido al servidor
 const inicio = async(req, res)=>{
-  console.log("He sido llamado, soy saludo del microservidor"); 
-  res.status(201).send("Microservidor A");
+  console.log("He sido llamado, soy saludo del microservidor");
+  res.setHeader('Content-Type', 'application/json');
+  res.status(201).send({response: "Microservidor A"});
 }
 
 
