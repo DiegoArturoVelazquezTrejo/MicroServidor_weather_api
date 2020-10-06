@@ -9,14 +9,7 @@ const sleep = functions.sleep;
 
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
-  console.log("Me han llamado!");
   // Verificar que los parámetros sean los que necesitamos
-  if(!req.body.data){
-    res.setHeader('Content-Type', 'application/json');
-    res.status(404).send({response: "Bad Request"});
-    return;
-  }
-
   const info_tickets = req.body.data;
 
   const partitions_array = [];
