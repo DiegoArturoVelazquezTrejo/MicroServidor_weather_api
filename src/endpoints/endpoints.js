@@ -10,7 +10,7 @@ const sleep = functions.sleep;
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
   // Verificar que los parámetros sean los que necesitamos
-  const info_tickets = req.body;
+  const info_tickets = req.body.data;
 
   const partitions_array = [];
   if(Object.keys(info_tickets).length < 55){
