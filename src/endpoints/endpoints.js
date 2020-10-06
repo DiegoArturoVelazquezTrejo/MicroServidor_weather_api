@@ -74,7 +74,12 @@ const weatherEndpoint = async(req, res)=>{
   return;
 };
 
+// Función para indicar que se ha accedido al servidor
+const inicio = async(req, res)=>{
+  res.status(201).send("Microservidor A");
+}
 
 
 // Exportar la función
 module.exports.weatherEndpoint = weatherEndpoint;
+module.exports.inicio = inicio; 
