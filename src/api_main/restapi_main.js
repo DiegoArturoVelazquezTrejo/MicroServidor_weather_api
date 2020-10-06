@@ -22,7 +22,6 @@ const REST_API_PORT = process.env.PORT || 8080;
 
 // Endpoint de subir csv
 app.post("/enviarInformacion", Endpoints.weatherEndpoint);
-app.get("/", Endpoints.inicio);
 
 // Aquí estamos creando al servidor
 var httpServer = http.createServer(app);
