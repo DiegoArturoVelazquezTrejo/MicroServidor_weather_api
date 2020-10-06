@@ -1,7 +1,7 @@
 const path = require('path');
 const {Worker, isMainThread, parentPort, workerData} = require('worker_threads');
 
-const workerPath = path.resolve('core/api_request_worker.js');
+const workerPath = path.resolve('src/core/api_request_worker.js');
 
 // Archivo en donde está la función que trabaja con los hilos
 // Regresa una promesa
@@ -36,4 +36,4 @@ const worker = async function(segments){
   });
 };
 
-module.exports.worker = worker; 
+module.exports.worker = worker;

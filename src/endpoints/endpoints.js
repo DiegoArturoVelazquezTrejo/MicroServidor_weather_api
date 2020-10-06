@@ -10,7 +10,8 @@ const sleep = functions.sleep;
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
   // Verificar que los parámetros sean los que necesitamos
-  const info_tickets = req.body.data;
+
+  const info_tickets = req.body;
 
   const partitions_array = [];
   if(Object.keys(info_tickets).length < 55){
@@ -36,6 +37,9 @@ const weatherEndpoint = async(req, res)=>{
     }
   }
 
+  console.log("Solicitando información...");
+  var beg = Date.now();
+
   // Vamos a trabajar con nuestra partición ...
   var beginig, end, difference;
   var segments = [];
@@ -58,12 +62,17 @@ const weatherEndpoint = async(req, res)=>{
     result_promises.push(partition_results)
   }
 
+  console.log("Proceso finalizado...");
+  var endi = Date.now();
+  diffinal = (endi - beg)/1000;
+  console.log("El sistemá tardó:   " +diffinal+ "   segundos en realizar las peticiones. ");
+
   // Nos falta unirlas con las respuestas de los dos microservidores
 
   return Promise.all(result_promises).then(results => {
     // Concatenar todos los resultados de todas las promesas
-    console.log("-----------------------------------------------------------");
     res.setHeader('Content-Type', 'application/json');
+    console.log(results);
     res.status(201).send(results);
   });
   return;
