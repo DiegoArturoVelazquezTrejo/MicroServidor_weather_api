@@ -7,6 +7,8 @@ const functions = require('../core/auxiliar_algorithms.js');
 const partition_data= functions.partition_data;
 const sleep = functions.sleep;
 
+require('events').EventEmitter.defaultMaxListeners = 15;
+
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
   // Verificar que los parámetros sean los que necesitamos
