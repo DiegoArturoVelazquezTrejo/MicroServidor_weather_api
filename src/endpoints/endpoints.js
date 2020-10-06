@@ -12,7 +12,8 @@ const weatherEndpoint = async(req, res)=>{
 
   // Verificar que los parámetros sean los que necesitamos
   if(!req.body.data){
-    res.status(404).send("Bad Request");
+    res.setHeader('Content-Type', 'application/json');
+    res.status(404).send({response: "Bad Request"});
     return;
   }
 
@@ -82,4 +83,4 @@ const inicio = async(req, res)=>{
 
 // Exportar la función
 module.exports.weatherEndpoint = weatherEndpoint;
-module.exports.inicio = inicio; 
+module.exports.inicio = inicio;
