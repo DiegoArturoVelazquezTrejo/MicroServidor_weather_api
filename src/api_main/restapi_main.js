@@ -18,11 +18,11 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 // Puerto en el que el servidor trabajará
-const REST_API_PORT = process.env.PORT || 8080;
+const REST_API_PORT = process.env.PORT || 3030;
 
 // Endpoint de subir csv
 app.post("/enviarInformacion", Endpoints.weatherEndpoint);
-app.get("/saludo", Endpoints.inicio); 
+app.get("/saludo", Endpoints.inicio);
 // Aquí estamos creando al servidor
 var httpServer = http.createServer(app);
 httpServer.listen(REST_API_PORT);

@@ -9,7 +9,7 @@ const sleep = functions.sleep;
 
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
-
+  console.log("Me han llamado!");
   // Verificar que los parámetros sean los que necesitamos
   if(!req.body.data){
     res.setHeader('Content-Type', 'application/json');
@@ -70,6 +70,7 @@ const weatherEndpoint = async(req, res)=>{
   return Promise.all(result_promises).then(results => {
     // Concatenar todos los resultados de todas las promesas
     console.log("-----------------------------------------------------------");
+    res.setHeader('Content-Type', 'application/json');
     res.status(201).send(results);
   });
   return;
@@ -77,6 +78,7 @@ const weatherEndpoint = async(req, res)=>{
 
 // Función para indicar que se ha accedido al servidor
 const inicio = async(req, res)=>{
+  console.log("He sido llamado, soy saludo del microservidor"); 
   res.status(201).send("Microservidor A");
 }
 
