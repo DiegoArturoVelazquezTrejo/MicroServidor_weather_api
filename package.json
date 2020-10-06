@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --experimental-worker api_main/restapi_main.js"
+    "start": "nodemon --experimental-worker src/api_main/restapi_main.js"
   },
   "keywords": [],
   "author": "",
