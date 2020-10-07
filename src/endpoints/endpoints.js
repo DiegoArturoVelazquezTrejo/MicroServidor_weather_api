@@ -9,11 +9,15 @@ const sleep = functions.sleep;
 
 require('events').EventEmitter.defaultMaxListeners = 15;
 
+
+//const Data = require("../resources/data_example.js");
+//const data = Data.data;
+
 // Este el el archivo que contiene los endpoints
 const weatherEndpoint = async(req, res)=>{
   // Verificar que los parámetros sean los que necesitamos
-
   const info_tickets = req.body;
+  //const info_tickets = data;
 
   const partitions_array = [];
   if(Object.keys(info_tickets).length < 55){
@@ -39,8 +43,8 @@ const weatherEndpoint = async(req, res)=>{
     }
   }
 
-  console.log("Solicitando información...");
-  var beg = Date.now();
+  //console.log("Solicitando información...");
+  //var beg = Date.now();
 
   // Vamos a trabajar con nuestra partición ...
   var beginig, end, difference;
@@ -64,27 +68,33 @@ const weatherEndpoint = async(req, res)=>{
     result_promises.push(partition_results)
   }
 
-  console.log("Proceso finalizado...");
-  var endi = Date.now();
-  diffinal = (endi - beg)/1000;
-  console.log("El sistemá tardó:   " +diffinal+ "   segundos en realizar las peticiones. ");
+  //console.log("Proceso finalizado...");
+  //var endi = Date.now();
+  //diffinal = (endi - beg)/1000;
+  //console.log("El sistemá tardó:   " +diffinal+ "   segundos en realizar las peticiones. ");
 
   // Nos falta unirlas con las respuestas de los dos microservidores
 
   return Promise.all(result_promises).then(results => {
+    json_result = {};
+    // Vamos a iterar sobre los resultados, es una lista con jsons, entonces vamos a concatenar todo a un solo json para enviar ese json como respuesta
+    for(var i= 0; i < results.length; i++){
+      for(var key in results[i]){
+        json_result[key] = results[i][key];
+      }
+    }
     // Concatenar todos los resultados de todas las promesas
     res.setHeader('Content-Type', 'application/json');
-    console.log(results);
-    res.status(201).send(results);
+    //console.log(json_result);
+    res.status(201).send(json_result);
   });
   return;
 };
 
 // Función para indicar que se ha accedido al servidor
 const inicio = async(req, res)=>{
-  console.log("He sido llamado, soy saludo del microservidor");
   res.setHeader('Content-Type', 'application/json');
-  res.status(201).send({response: "Microservidor A"});
+  res.status(201).send([{response: "Microservidor A"}, {response:"Microservidor A1"}]);
 }
 
 
